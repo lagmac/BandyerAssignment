@@ -7,30 +7,69 @@
 
 import UIKit
 
-class VideoCallMainPage: UIViewController
+class VideoCallMainPage: UIViewController, VideoCallMainPageDisplayLogic
 {
     var hangupButton: UIButton!
     var switchCameraButton: UIButton!
     var muteMicrophoneButton: UIButton!
-    var cameraPreview: UIView!
+    var cameraPreview: CameraView!
     var incomingCallView: UIView!
+    
+    var viewModel: VideoCallMainPageViewModel!
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        self.viewModel = VideoCallMainPageViewModel()
+        self.viewModel.scene = self
+        
         initViewLayout()
+    }
+    
+    func responseToStartCall()
+    {
+        updateUI()
+    }
+    
+    func responseToCloseCall()
+    {
+        updateUI()
+    }
+    
+    func responseSwitchCamera()
+    {
+        self.cameraPreview.switchCamera()
+    }
+    
+    private func updateUI()
+    {
+        if self.viewModel.onCall
+        {
+            addCameraPreview()
+        }
+        else
+        {
+            self.cameraPreview.removeFromSuperview()
+        }
+        
+        let hangButtonTitle = self.viewModel.onCall ? "CLOSE" : "CALL"
+        
+        self.hangupButton.setTitle(hangButtonTitle, for: .normal)
+        self.switchCameraButton.isHidden = !self.viewModel.onCall
+        self.muteMicrophoneButton.isHidden = !self.viewModel.onCall
     }
 
     private func initViewLayout()
     {
         addIncomingCallView()
         addButtons()
-        addCameraPreview()
     }
     
     private func addButtons()
     {
         self.hangupButton = UIButton()
+        self.hangupButton.setTitle("CALL", for: .normal)
         self.hangupButton.backgroundColor = .green;
         self.view.addSubview(hangupButton)
         self.hangupButton.setConstraint(withWidth: 80,
@@ -43,9 +82,11 @@ class VideoCallMainPage: UIViewController
                                         relativeToViewAnchorX: .CenterX,
                                         relativeToViewAnchorY: .Bottom)
         
-        self.hangupButton.addTarget(self, action: #selector(self.hangup), for: .touchUpInside)
+        self.hangupButton.addTarget(self.viewModel, action: #selector(viewModel.hangup), for: .touchUpInside)
         
         self.switchCameraButton = UIButton()
+        self.switchCameraButton.setTitle("SWITCH", for: .normal)
+        self.switchCameraButton.isHidden = !self.viewModel.onCall
         self.switchCameraButton.backgroundColor = .red;
         self.view.addSubview(switchCameraButton)
         self.switchCameraButton.setConstraint(withWidth: 80,
@@ -58,9 +99,11 @@ class VideoCallMainPage: UIViewController
                                               relativeToViewAnchorX: .Trailing,
                                               relativeToViewAnchorY: .Bottom)
         
-        self.switchCameraButton.addTarget(self, action: #selector(self.switchCamera), for: .touchUpInside)
+        self.switchCameraButton.addTarget(self.viewModel, action: #selector(viewModel.switchCamera), for: .touchUpInside)
 
         self.muteMicrophoneButton = UIButton()
+        self.muteMicrophoneButton.setTitle("MUTE", for: .normal)
+        self.muteMicrophoneButton.isHidden = !self.viewModel.onCall
         self.muteMicrophoneButton.backgroundColor = UIColor.blue;
         self.view.addSubview(muteMicrophoneButton)
         self.muteMicrophoneButton.setConstraint(withWidth: 80,
@@ -73,9 +116,7 @@ class VideoCallMainPage: UIViewController
                                                 relativeToViewAnchorX: .Leading,
                                                 relativeToViewAnchorY: .Bottom)
         
-        self.muteMicrophoneButton.addTarget(self, action: #selector(self.muteMicrophoneButtonTapped), for: .touchUpInside)
-        
-        
+        self.muteMicrophoneButton.addTarget(self.viewModel, action: #selector(viewModel.muteMicrophoneButtonTapped), for: .touchUpInside)
     }
     
     private func addIncomingCallView()
@@ -97,11 +138,11 @@ class VideoCallMainPage: UIViewController
     
     private func addCameraPreview()
     {
-        self.cameraPreview = UIView()
+        self.cameraPreview = CameraView()
         self.cameraPreview.backgroundColor = .yellow
         self.view.addSubview(self.cameraPreview)
-        self.cameraPreview.setConstraint(withWidth: 100,
-                                         height: 200,
+        self.cameraPreview.setConstraint(withWidth: 120,
+                                         height: 120,
                                          offsetX: -20,
                                          offSetY: 20,
                                          anchorX: .Trailing,
@@ -109,21 +150,6 @@ class VideoCallMainPage: UIViewController
                                          relativeToView: self.view,
                                          relativeToViewAnchorX: .Trailing,
                                          relativeToViewAnchorY: .Top)
-    }
-    
-    @objc private func hangup()
-    {
-        print("START CALL...")
-    }
-    
-    @objc private func switchCamera()
-    {
-        print("SWITCH CAMERA...")
-    }
-    
-    @objc private func muteMicrophoneButtonTapped()
-    {
-        print("MUTE MICROPHONE...")
     }
 }
 

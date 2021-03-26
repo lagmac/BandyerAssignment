@@ -14,6 +14,8 @@
 		77BFC8B3260DC5AC00DD4583 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77BFC8B2260DC5AC00DD4583 /* Assets.xcassets */; };
 		77BFC8B6260DC5AC00DD4583 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77BFC8B4260DC5AC00DD4583 /* LaunchScreen.storyboard */; };
 		77BFC8C4260DD69C00DD4583 /* UIView+ConstraintExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BFC8C3260DD69C00DD4583 /* UIView+ConstraintExtensions.swift */; };
+		77E81BB8260E0700004CA5B2 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E81BB7260E0700004CA5B2 /* CameraView.swift */; };
+		77E81BBB260E0E80004CA5B2 /* VideoCallMainPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E81BBA260E0E80004CA5B2 /* VideoCallMainPageViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		77BFC8B5260DC5AC00DD4583 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		77BFC8B7260DC5AC00DD4583 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		77BFC8C3260DD69C00DD4583 /* UIView+ConstraintExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ConstraintExtensions.swift"; sourceTree = "<group>"; };
+		77E81BB7260E0700004CA5B2 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		77E81BBA260E0E80004CA5B2 /* VideoCallMainPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCallMainPageViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +94,8 @@
 			isa = PBXGroup;
 			children = (
 				77BFC8AD260DC5AC00DD4583 /* VideoCallMainPage.swift */,
+				77E81BB7260E0700004CA5B2 /* CameraView.swift */,
+				77E81BBA260E0E80004CA5B2 /* VideoCallMainPageViewModel.swift */,
 			);
 			path = VideoCallController;
 			sourceTree = "<group>";
@@ -167,6 +173,8 @@
 				77BFC8C4260DD69C00DD4583 /* UIView+ConstraintExtensions.swift in Sources */,
 				77BFC8AE260DC5AC00DD4583 /* VideoCallMainPage.swift in Sources */,
 				77BFC8AA260DC5AC00DD4583 /* AppDelegate.swift in Sources */,
+				77E81BB8260E0700004CA5B2 /* CameraView.swift in Sources */,
+				77E81BBB260E0E80004CA5B2 /* VideoCallMainPageViewModel.swift in Sources */,
 				77BFC8AC260DC5AC00DD4583 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

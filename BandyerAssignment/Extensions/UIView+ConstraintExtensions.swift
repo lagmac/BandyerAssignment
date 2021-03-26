@@ -19,6 +19,12 @@ enum Position
 
 extension UIView
 {
+    /// Set the constraint for a view
+    ///
+    /// - Parameter width: The width of the view
+    /// - Parameter height: The height of the view
+    /// - Parameter offsetX: The space on X axis beetwen the view and its parent
+    /// - Parameter offSetY: The space on Y axis beetwen the view and its parent
     func setConstraint(withWidth width: CGFloat,
                        height: CGFloat,
                        offsetX: CGFloat,
